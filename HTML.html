@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Guide des Decks par Arène - Clash Royale</title>
+  <link rel="stylesheet" href="styles.css">
+
+  <title>Guide des Decks par Arène - Clash Royale</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #1e1e1e;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+    select {
+      padding: 10px;
+      font-size: 16px;
+      margin: 20px;
+    }
+    .deck-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+      margin-top: 30px;
+    }
+    .deck {
+      background-color: #2a2a2a;
+      padding: 15px;
+      border-radius: 10px;
+      width: 250px;
+      box-shadow: 0 0 10px #000;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 5px;
+      margin-bottom: 10px;
+    }
+    .cards img {
+      width: 50px;
+      height: 50px;
+      border-radius: 5px;
+    }
+    .deck-info {
+      font-size: 14px;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📊 Guide des Decks par Arène</h1>
+
+  <label for="arena">Choisis ton arène :</label>
+  <select id="arena" onchange="showDecks()">
+    <option value="">-- Sélectionne --</option>
+    <option value="5">Arène 5 - Vallée des sorts</option>
+    <option value="7">Arène 7 - Atelier royal</option>
+    <option value="10">Arène 10 - Mont des cochons</option>
+  </select>
+
+  <div id="decks" class="deck-container"></div>
+
+  <script>
+    const decksData = {
+      "5": [
+        {
+          cards: ["https://i.imgur.com/1.png", "https://i.imgur.com/2.png", "https://i.imgur.com/3.png", "https://i.imgur.com/4.png", "https://i.imgur.com/5.png", "https://i.imgur.com/6.png", "https://i.imgur.com/7.png", "https://i.imgur.com/8.png"],
+          cout: 3.4,
+          type: "Cycle rapide"
+        },
+        {
+          cards: ["https://i.imgur.com/1.png", "https://i.imgur.com/2.png", "https://i.imgur.com/3.png", "https://i.imgur.com/4.png", "https://i.imgur.com/5.png", "https://i.imgur.com/6.png", "https://i.imgur.com/7.png", "https://i.imgur.com/8.png"],
+          cout: 4.0,
+          type: "Contrôle"
+        }
+      ],
+      "7": [
+        {
+          cards: ["https://i.imgur.com/1.png", "https://i.imgur.com/2.png", "https://i.imgur.com/3.png", "https://i.imgur.com/4.png", "https://i.imgur.com/5.png", "https://i.imgur.com/6.png", "https://i.imgur.com/7.png", "https://i.imgur.com/8.png"],
+          cout: 3.8,
+          type: "Beatdown"
+        }
+      ]
+    };
+
+    function showDecks() {
+      const arena = document.getElementById("arena").value;
+      const decks = decksData[arena] || [];
+      const decksContainer = document.getElementById("decks");
+
+      decksContainer.innerHTML = "";
+
+      decks.forEach(deck => {
+        const deckDiv = document.createElement("div");
+        deckDiv.className = "deck";
+
+        const cardsDiv = document.createElement("div");
+        cardsDiv.className = "cards";
+
+        deck.cards.forEach(cardUrl => {
+          const img = document.createElement("img");
+          img.src = cardUrl;
+          cardsDiv.appendChild(img);
+        });
+
+        const info = document.createElement("div");
+        info.className = "deck-info";
+        info.innerHTML = `💧 Coût moyen : <b>${deck.cout}</b><br>⚔️ Style : <b>${deck.type}</b>`;
+
+        deckDiv.appendChild(cardsDiv);
+        deckDiv.appendChild(info);
+
+        decksContainer.appendChild(deckDiv);
+      });
+    }
+  </script>
+
+</body>
+</html>
